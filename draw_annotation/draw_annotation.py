@@ -5,7 +5,8 @@ from typing import Union, Tuple
 
 def draw_annotation(image: Union[np.ndarray, str, Image.Image], annotation: Union[list, np.ndarray],
                     label: Union[bool, str] = None, color: Tuple[int, int, int, int] = None,
-                    probs: list = None) -> np.ndarray:
+                    probs: list = None, point_size: int = 30, rectangle_boarder_size: int = 10,
+                    font_size: int = 40) -> np.ndarray:
     """
     Draw annotation (bbox or point(circle)) on image.
     Args:
@@ -17,10 +18,8 @@ def draw_annotation(image: Union[np.ndarray, str, Image.Image], annotation: Unio
     Returns: image in numpy array format with drawn annotations
 
     """
-    fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 40)
+    fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", font_size)
     fnt_height = fnt.getmetrics()  # ascent, descent
-    point_size = 30
-    rectangle_boarder_size = 10
     if color is None:
         color = 'red'
     point_draw_margin = np.array(((-point_size/2, -point_size/2), (point_size/2, point_size/2)))

@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Union, Tuple, List
-from .color import color as default_color
+from .color import colors as default_colors
 
 
 def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list, np.ndarray],
@@ -15,7 +15,7 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
     ]
     fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", font_size)
     fnt_height = fnt.getmetrics()  # ascent, descent
-    color = [tuple(c + [transparency]) for c in default_color]
+    color = [tuple(c + [transparency]) for c in default_colors]
     point_draw_margin = np.array(((-point_size/2, -point_size/2), (point_size/2, point_size/2)))
     if isinstance(image, str):
         image = Image.open(image)

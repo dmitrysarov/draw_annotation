@@ -39,8 +39,9 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
             draw.ellipse(annotation_, fill=color, outline=color)
     ## draw skeleton
     for sk in skeleton:
-        point1 = annotation[sk[0]-1].tolist()
-        point2 = annotation[sk[1]-1].tolist()
-        color = colors[sk[0]-1]
-        draw.line(point1 + point2, fill=color, width=skeleton_width)
+        if set(sk) & {8, 9}:  # if joint is elbow
+            point1 = annotation[sk[0]-1].tolist()
+            point2 = annotation[sk[1]-1].tolist()
+            color = colors[sk[0]-1]
+            draw.line(point1 + point2, fill=color, width=skeleton_width)
     return np.array(image)

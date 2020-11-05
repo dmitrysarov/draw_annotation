@@ -15,7 +15,7 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
     ]
     fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", font_size)
     fnt_height = fnt.getmetrics()  # ascent, descent
-    color = [tuple(c + [transparency]) for c in default_colors]
+    colors = [tuple(c + [transparency]) for c in default_colors]
     point_draw_margin = np.array(((-point_size/2, -point_size/2), (point_size/2, point_size/2)))
     if isinstance(image, str):
         image = Image.open(image)
@@ -34,12 +34,13 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
         if len(annotation_) == 0:
             continue
         if len(annotation_) == 2:
+            color = colors[num]
             annotation_ = tuple((annotation_ + point_draw_margin).flatten())
-            draw.ellipse(annotation_, fill=color[num], outline=tuple(color[num]))
+            draw.ellipse(annotation_, fill=color, outline=color)
     ## draw skeleton
     for sk in skeleton:
         point1 = annotation[sk[0]-1]
         point2 = annotation[sk[1]-1]
-        color = tuple(color[sk[0]-1])
+        color = colors[sk[0]-1]
         draw.line(point1 + point2, fill=color, width=skeleton_width)
     return np.array(image)

@@ -38,8 +38,8 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
             draw.ellipse(annotation_, fill=color[num], outline=tuple(color[num]))
     ## draw skeleton
     for sk in skeleton:
-        point1 = annotation[sk[0]]
-        point2 = annotation[sk[1]]
-        color = tuple(color[sk[0]])
+        point1 = annotation[sk[0]-1]
+        point2 = annotation[sk[1]-1]
+        color = tuple(color[sk[0]-1])
         draw.line(point1 + point2, fill=color, width=skeleton_width)
     return np.array(image)

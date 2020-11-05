@@ -5,6 +5,25 @@ from typing import Union, Tuple, List
 from .color import colors as default_colors
 
 
+kp_names = ['nose',
+'eye_left',
+'eye_right',
+'ear_left',
+'ear_right',
+'shoulder_left',
+'shoulder_right',
+'elbow_left',
+'elbow_right',
+'wrist_left',
+'wrist_right',
+'hip_left',
+'hip_right',
+'knee_left',
+'knee_right',
+'ankle_left',
+'ankle_right']
+
+
 def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list, np.ndarray],
                     label: Union[bool, str] = None,
                     probs: list = None, point_size: int = 30, rectangle_boarder_size: int = 10,
@@ -31,12 +50,13 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
     annotation = annotation.squeeze()
     ## draw joints
     for num, annotation_ in enumerate(annotation):
-        if len(annotation_) == 0:
-            continue
-        if len(annotation_) == 2:
-            color = colors[num]
-            annotation_ = tuple((annotation_ + point_draw_margin).flatten())
-            draw.ellipse(annotation_, fill=color, outline=color)
+        if num in {5, 6, 7, 8, 9, 10}:  # consider only sholders, elbows and wrists
+            if len(annotation_) == 0:
+                continue
+            if len(annotation_) == 2:
+                color = colors[num]
+                annotation_ = tuple((annotation_ + point_draw_margin).flatten())
+                draw.ellipse(annotation_, fill=color, outline=color)
     ## draw skeleton
     for sk in skeleton:
         if set(sk) & {8, 9}:  # if joint is elbow

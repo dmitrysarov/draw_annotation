@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Union, Tuple, List
-from color import color as default_color
+from .color import color as default_color
 
 
 def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list, np.ndarray],

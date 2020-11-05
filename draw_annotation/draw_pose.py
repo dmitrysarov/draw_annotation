@@ -35,7 +35,7 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
             continue
         if len(annotation_) == 2:
             annotation_ = tuple((annotation_ + point_draw_margin).flatten())
-            draw.ellipse(annotation_, fill=color[num], outline=tuple(color[num] + [transparency]))
+            draw.ellipse(annotation_, fill=color[num], outline=tuple(color[num]))
     ## draw skeleton
     for sk in skeleton:
         point1 = annotation[sk[0]]

@@ -40,6 +40,6 @@ def draw_pose(image: Union[np.ndarray, str, Image.Image], annotation: Union[list
     for sk in skeleton:
         point1 = annotation[sk[0]]
         point2 = annotation[sk[1]]
-        color = tuple(color[sk[0]] + [transparency])
+        color = tuple(color[sk[0]])
         draw.line(point1 + point2, fill=color, width=skeleton_width)
     return np.array(image)

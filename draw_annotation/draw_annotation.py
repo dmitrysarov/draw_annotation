@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Union, Tuple, List
 from .color import colors as default_colors
+import random
 
 
 def draw_annotation(image: Union[np.ndarray, str, Image.Image], annotation: Union[list, np.ndarray],
@@ -27,6 +28,7 @@ def draw_annotation(image: Union[np.ndarray, str, Image.Image], annotation: Unio
     fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", font_size)
     fnt_height = fnt.getmetrics()  # ascent, descent
     color = [tuple(c + [transparency]) for c in default_colors]
+    random.shuffle(color)
     point_draw_margin = np.array(((-point_size/2, -point_size/2), (point_size/2, point_size/2)))
     if isinstance(image, str):
         image = Image.open(image)

@@ -60,7 +60,7 @@ def draw_annotation(image: Union[np.ndarray, str, Image.Image], annotation: Unio
                 label_ = str(label)
                 draw.text(annotation, label_, font=fnt, fill=color[0])
             elif isinstance(label, np.ndarray):
-                draw.text(annotation_[:2], str(label[0]), font=fnt, fill=color[0])
+                draw.text(annotation, str(label[0]), font=fnt, fill=color[0])
         if probs is not None:
             draw.text(annotation[::3] - np.array([0, sum(fnt_height)]), f'{probs[0]:.2f}', font=fnt, fill=color[0])
     elif len(annotation.shape) == 2:  # batch of annotation samples

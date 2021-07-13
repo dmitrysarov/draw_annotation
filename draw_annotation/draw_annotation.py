@@ -78,10 +78,13 @@ def draw_annotation(image: Union[np.ndarray, str, Image.Image], annotation: Unio
             elif len(annotation_) == 5:
                 draw.rectangle(tuple(annotation_[:-1]), width=rectangle_boarder_size, outline=color[num])
             if label is not None:
-                label_ = str(num)
-                if isinstance(label, str):
-                    label_ = str(label) + '_' + label_
-                draw.text(annotation_[:2], label_, font=fnt, fill=color[num])
+                if isinstance(label, bool):
+                    label_ = str(num)
+                    if isinstance(label, str):
+                        label_ = str(label) + '_' + label_
+                    draw.text(annotation_[:2], label_, font=fnt, fill=color[num])
+                elif isinstance(label, np.ndarray):
+                    draw.text(annotation_[:2], str(label[num]), font=fnt, fill=color[num])
             if probs is not None:
                 prob = probs[num]
                 draw.text(annotation_[::3] - np.array([0, sum(fnt_height)]), f'{prob:.2f}', font=fnt, fill=color[num])
